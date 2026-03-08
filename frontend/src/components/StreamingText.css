@@ -1,0 +1,64 @@
+.streaming-text {
+  position: relative;
+  width: 100%;
+  color: var(--text-primary);
+}
+
+.markdown-paragraph {
+  margin: 0.7em 0;
+  line-height: 1.65;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.markdown-list {
+  margin: 0.7em 0;
+  padding-left: 22px;
+}
+
+.markdown-list-item {
+  margin: 0.45em 0;
+  line-height: 1.65;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.markdown-list-item::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.inline-code {
+  background: #edf2fb;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: "Consolas", "Cascadia Code", monospace;
+  font-size: 0.82rem;
+  color: #17305f;
+}
+
+.code-block {
+  display: block;
+  background: #f4f7fd;
+  color: #14223b;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-family: "Consolas", "Cascadia Code", monospace;
+  font-size: 0.83rem;
+  margin: 0.8em 0;
+  border: 1px solid var(--border);
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+.katex-display {
+  margin: 1em 0;
+  padding: 0.6em;
+  background: #f7faff;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  overflow-x: auto;
+}

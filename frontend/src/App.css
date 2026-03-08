@@ -1,0 +1,108 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  gap: 14px;
+  padding: 14px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.panel {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  position: relative;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.chat-panel {
+  flex-shrink: 0;
+  min-width: 320px;
+  transition: width 0.12s ease-out;
+}
+
+.simulation-panel {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.resize-divider {
+  width: 10px;
+  background: transparent;
+  cursor: col-resize;
+  flex-shrink: 0;
+  border-radius: 999px;
+  position: relative;
+  user-select: none;
+}
+
+.resize-divider::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: #c2d0e8;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resize-divider:hover::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(31, 77, 189, 0.12);
+}
+
+@media (max-width: 992px) {
+  .app-container {
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .chat-panel {
+    width: 100% !important;
+    min-width: 0;
+    height: 52vh;
+  }
+
+  .simulation-panel {
+    height: 72vh;
+  }
+
+  .resize-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 10px;
+  }
+
+  .chat-panel {
+    height: 54vh;
+  }
+
+  .simulation-panel {
+    height: 68vh;
+  }
+}

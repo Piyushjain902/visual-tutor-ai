@@ -1,0 +1,345 @@
+{
+  "simulationId": "faraday",
+  "title": "Electromagnetic Induction (Faraday's Law)",
+  "version": "1.0",
+  
+  "overview": {
+    "description": "An interactive PhET simulation demonstrating electromagnetic induction. Users explore how moving a bar magnet near a coil induces an electromotive force (EMF) and current, visualizing Faraday's Law and Lenz's Law in action.",
+    "targetConcepts": [
+      "Electromagnetic Induction",
+      "Faraday's Law of Induction",
+      "Lenz's Law",
+      "Magnetic Flux",
+      "Induced EMF and Current",
+      "Rate of Change of Flux"
+    ],
+    "physicsBackground": {
+      "faradaysLaw": {
+        "statement": "The induced EMF in a circuit is equal to the negative rate of change of magnetic flux through the circuit.",
+        "equation": "ε = -dΦ/dt",
+        "implication": "A changing magnetic flux is required to induce an EMF. The faster the flux changes, the greater the induced EMF."
+      },
+      "lenzsLaw": {
+        "statement": "The direction of the induced current is such that it opposes the change in magnetic flux that produced it.",
+        "implication": "If flux is increasing, the induced current creates a magnetic field opposing the increase. If flux is decreasing, the induced current creates a field that tries to maintain the flux."
+      },
+      "magneticFlux": {
+        "definition": "The total magnetic field passing through a surface, calculated as Φ = B × A × cos(θ)",
+        "units": "Weber (Wb)",
+        "factors": ["Magnetic field strength (B)", "Area of the coil (A)", "Angle between field and coil normal (θ)"]
+      }
+    }
+  },
+
+  "components": {
+    "barMagnet": {
+      "name": "Bar Magnet",
+      "description": "A permanent magnet with clearly marked north (N) and south (S) poles that can be moved horizontally toward or away from the coil.",
+      "role": "Source of the magnetic field. Moving it changes the magnetic flux through the coil.",
+      "interactions": {
+        "movable": true,
+        "reversiblePolarity": true,
+        "strengthAdjustable": true
+      },
+      "physicsConnection": "The magnet's movement is what creates a time-varying magnetic flux through the coil, which is essential for electromagnetic induction."
+    },
+    "coil": {
+      "name": "Coil (Solenoid)",
+      "description": "A wire wound in loops. The simulation offers single-coil and double-coil (4-loop) configurations.",
+      "role": "The conductor where EMF is induced when magnetic flux changes through it.",
+      "configurations": {
+        "singleCoil": {
+          "loops": 1,
+          "sensitivity": "Lower induced EMF for same flux change"
+        },
+        "doubleCoil": {
+          "loops": 4,
+          "sensitivity": "Higher induced EMF (4x more loops = 4x more EMF for same flux change)"
+        }
+      },
+      "physicsConnection": "More loops means more EMF is induced for the same rate of flux change, since ε = -N × dΦ/dt, where N is the number of turns."
+    },
+    "lightbulb": {
+      "name": "Light Bulb",
+      "description": "A bulb connected in a closed circuit with the coil. It glows when current flows through the circuit.",
+      "role": "Visual indicator of induced current. Brightness corresponds to current magnitude.",
+      "states": {
+        "off": "No current flowing (magnet stationary or far away)",
+        "dim": "Small current (slow magnet movement or weak flux change)",
+        "bright": "Large current (fast magnet movement or strong flux change)"
+      },
+      "physicsConnection": "The bulb demonstrates that induced EMF drives a current through a closed circuit, converting magnetic energy to electrical energy to light energy."
+    },
+    "voltmeter": {
+      "name": "Voltmeter",
+      "description": "An optional display showing the magnitude and direction of the induced EMF.",
+      "role": "Quantitative measurement of induced EMF.",
+      "displayFeatures": {
+        "needleDeflection": "Shows direction and relative magnitude of EMF",
+        "positiveDeflection": "EMF in one direction",
+        "negativeDeflection": "EMF in opposite direction",
+        "zeroReading": "No EMF (constant or zero flux)"
+      },
+      "physicsConnection": "Directly shows the induced EMF, allowing students to correlate magnet motion with EMF magnitude and direction."
+    },
+    "magneticFieldLines": {
+      "name": "Magnetic Field Lines",
+      "description": "Optional visualization showing the magnetic field pattern around the bar magnet.",
+      "role": "Helps students visualize how the magnetic field interacts with the coil.",
+      "visualization": {
+        "pattern": "Field lines emerge from north pole and enter south pole",
+        "density": "Closer lines = stronger field",
+        "coilInteraction": "Shows how many field lines pass through the coil (visual representation of flux)"
+      },
+      "physicsConnection": "Helps understand that moving the magnet changes how many field lines pass through the coil, which is the changing flux."
+    }
+  },
+
+  "adjustableParameters": {
+    "magnetPosition": {
+      "name": "Magnet Position",
+      "type": "continuous",
+      "range": "Far from coil to inside/through coil",
+      "effect": "Determines the magnetic flux through the coil at any instant",
+      "keyPositions": {
+        "farAway": "Very low flux through coil",
+        "approaching": "Increasing flux as magnet gets closer",
+        "closest": "Maximum flux when magnet is at or inside coil",
+        "receding": "Decreasing flux as magnet moves away"
+      }
+    },
+    "magnetVelocity": {
+      "name": "Magnet Speed/Velocity",
+      "type": "continuous",
+      "range": "Stationary to fast movement",
+      "effect": "Determines the rate of flux change (dΦ/dt) and thus the induced EMF magnitude",
+      "keyStates": {
+        "stationary": "Zero EMF (no flux change)",
+        "slowMovement": "Small EMF",
+        "fastMovement": "Large EMF",
+        "veryFastMovement": "Very large EMF"
+      }
+    },
+    "magnetPolarity": {
+      "name": "Magnet Polarity/Orientation",
+      "type": "discrete",
+      "options": ["North pole toward coil", "South pole toward coil"],
+      "effect": "Determines the direction of the magnetic field through the coil",
+      "impact": "Reversing polarity reverses the direction of induced EMF for the same motion"
+    },
+    "magnetStrength": {
+      "name": "Magnet Strength",
+      "type": "discrete",
+      "options": ["Low (1)", "Medium", "High"],
+      "effect": "Stronger magnet = greater magnetic flux = greater induced EMF for same movement",
+      "physicsNote": "The magnetic field strength B directly affects flux Φ = B × A"
+    },
+    "coilConfiguration": {
+      "name": "Coil Type",
+      "type": "discrete",
+      "options": ["Single coil (1 loop)", "Double coil (4 loops)"],
+      "effect": "More loops = greater induced EMF for same flux change",
+      "physicsNote": "ε = -N × dΦ/dt, so doubling N doubles the EMF"
+    },
+    "showFieldLines": {
+      "name": "Show Field Lines",
+      "type": "toggle",
+      "options": ["On", "Off"],
+      "effect": "Visual aid for understanding magnetic field distribution"
+    },
+    "showVoltmeter": {
+      "name": "Show Voltmeter",
+      "type": "toggle",
+      "options": ["On", "Off"],
+      "effect": "Enables quantitative EMF measurement"
+    }
+  },
+
+  "causeEffectRelationships": {
+    "stationaryMagnet": {
+      "action": "Keep the magnet completely stationary at any position",
+      "cause": "No change in magnetic flux (dΦ/dt = 0)",
+      "effect": "Zero induced EMF, voltmeter reads zero, bulb stays off",
+      "principle": "Faraday's Law: No flux change means no induced EMF"
+    },
+    "magnetMovingToward": {
+      "action": "Move the magnet toward the coil",
+      "cause": "Magnetic flux through coil is increasing (dΦ/dt > 0)",
+      "effect": "EMF is induced, voltmeter deflects in one direction, bulb lights up",
+      "lenzLawEffect": "Induced current creates a magnetic field opposing the incoming magnet (repelling it)"
+    },
+    "magnetMovingAway": {
+      "action": "Move the magnet away from the coil",
+      "cause": "Magnetic flux through coil is decreasing (dΦ/dt < 0)",
+      "effect": "EMF is induced in opposite direction, voltmeter deflects opposite way, bulb lights up",
+      "lenzLawEffect": "Induced current creates a magnetic field trying to maintain the flux (attracting the departing magnet)"
+    },
+    "fasterMovement": {
+      "action": "Increase the speed of magnet movement",
+      "cause": "Greater rate of flux change (larger |dΦ/dt|)",
+      "effect": "Greater induced EMF, larger voltmeter deflection, brighter bulb",
+      "principle": "EMF is proportional to the rate of flux change, not just the flux itself"
+    },
+    "slowerMovement": {
+      "action": "Decrease the speed of magnet movement",
+      "cause": "Smaller rate of flux change (smaller |dΦ/dt|)",
+      "effect": "Smaller induced EMF, smaller voltmeter deflection, dimmer bulb",
+      "principle": "Same total flux change over longer time = smaller instantaneous EMF"
+    },
+    "reversePolarity": {
+      "action": "Flip the magnet so opposite pole faces the coil",
+      "cause": "Magnetic field direction through coil is reversed",
+      "effect": "For the same motion (e.g., moving toward), the induced EMF direction reverses",
+      "principle": "The sign of the flux change depends on field direction"
+    },
+    "moreCoilLoops": {
+      "action": "Switch from single coil to double coil (4 loops)",
+      "cause": "More turns of wire are cutting the magnetic flux",
+      "effect": "Greater induced EMF for the same magnet motion",
+      "principle": "ε = -N × dΦ/dt, so more turns = proportionally more EMF"
+    },
+    "strongerMagnet": {
+      "action": "Increase magnet strength",
+      "cause": "Stronger magnetic field = greater flux through coil",
+      "effect": "Greater flux change for same movement = greater induced EMF",
+      "principle": "Φ = B × A, so larger B means larger Φ and dΦ/dt"
+    }
+  },
+
+  "expectedObservations": {
+    "scenario1_stationaryMagnet": {
+      "setup": "Place magnet near coil but keep it stationary",
+      "observation": "Voltmeter reads zero, bulb is off",
+      "explanation": "Even though there is magnetic flux through the coil, it is constant. Faraday's Law requires a CHANGING flux to induce EMF."
+    },
+    "scenario2_slowApproach": {
+      "setup": "Move magnet slowly toward the coil",
+      "observation": "Voltmeter shows small deflection, bulb glows dimly",
+      "explanation": "Slow movement means slow flux change, resulting in small induced EMF."
+    },
+    "scenario3_fastApproach": {
+      "setup": "Move magnet quickly toward the coil",
+      "observation": "Voltmeter shows large deflection, bulb glows brightly",
+      "explanation": "Fast movement means rapid flux change, resulting in large induced EMF."
+    },
+    "scenario4_approachVsRetreat": {
+      "setup": "Move magnet toward coil, then away from coil",
+      "observation": "Voltmeter deflects one way when approaching, opposite way when retreating",
+      "explanation": "Flux increasing vs decreasing causes opposite EMF directions (Lenz's Law)."
+    },
+    "scenario5_singleVsDoubleCoil": {
+      "setup": "Perform same magnet motion with single coil, then with double coil",
+      "observation": "Double coil produces larger voltmeter deflection",
+      "explanation": "More loops (N) means more EMF for the same flux change rate."
+    },
+    "scenario6_magnetStrengthEffect": {
+      "setup": "Move magnet at same speed with low vs high magnet strength",
+      "observation": "Stronger magnet produces larger EMF and brighter bulb",
+      "explanation": "Stronger field means greater flux and thus greater flux change."
+    },
+    "scenario7_polarityReversal": {
+      "setup": "Move north pole toward coil, then flip and move south pole toward coil",
+      "observation": "EMF direction reverses (voltmeter deflects opposite way)",
+      "explanation": "Opposite pole means opposite field direction, reversing the flux change sign."
+    },
+    "scenario8_oscillatingMagnet": {
+      "setup": "Move magnet back and forth through the coil continuously",
+      "observation": "Voltmeter oscillates between positive and negative, bulb flickers",
+      "explanation": "Alternating flux increase/decrease creates alternating EMF (AC-like behavior)."
+    }
+  },
+
+  "commonMisconceptions": {
+    "misconception1": {
+      "wrong": "A stationary magnet near a coil will induce a constant EMF",
+      "correct": "Only a CHANGING magnetic flux induces an EMF. A stationary magnet creates constant flux, so no EMF.",
+      "clarification": "It's not the presence of a magnetic field that matters, but the CHANGE in flux over time."
+    },
+    "misconception2": {
+      "wrong": "Moving the magnet faster creates more total energy",
+      "correct": "Moving faster creates more EMF (power) but for less time. The total energy transferred depends on both.",
+      "clarification": "A faster motion gives higher instantaneous EMF but the flux change happens over a shorter duration."
+    },
+    "misconception3": {
+      "wrong": "The induced current flows in the direction that helps the magnet",
+      "correct": "Lenz's Law states the induced current OPPOSES the change - it resists the magnet's motion.",
+      "clarification": "This is a consequence of conservation of energy - you must do work against the opposing force."
+    },
+    "misconception4": {
+      "wrong": "Stronger magnet always means more current",
+      "correct": "A stronger MOVING magnet induces more EMF. A stronger STATIONARY magnet still induces nothing.",
+      "clarification": "The key is always the rate of flux CHANGE, not just the flux magnitude."
+    }
+  },
+
+  "realWorldApplications": {
+    "electricGenerators": {
+      "description": "Power plants use rotating coils in magnetic fields (or rotating magnets near coils) to generate electricity",
+      "connection": "Same principle - mechanical motion creates changing flux, inducing EMF"
+    },
+    "transformers": {
+      "description": "Devices that increase or decrease AC voltage using two coils",
+      "connection": "Changing current in one coil creates changing flux through another coil"
+    },
+    "inductionCooking": {
+      "description": "Cooktops that heat pans directly using induced currents",
+      "connection": "Rapidly changing magnetic field induces currents in the metal pan"
+    },
+    "metalDetectors": {
+      "description": "Security scanners and treasure hunting devices",
+      "connection": "Metal objects disturb the magnetic field, changing flux in detector coils"
+    },
+    "wirelessCharging": {
+      "description": "Charging phones without plugging them in",
+      "connection": "Changing magnetic field from charging pad induces current in phone's coil"
+    },
+    "regenerativeBraking": {
+      "description": "Electric cars recover energy while slowing down",
+      "connection": "Wheels turning generators (motors in reverse) induce current that recharges batteries"
+    }
+  },
+
+  "conceptualQA": {
+    "q1": {
+      "question": "Why doesn't a stationary magnet cause the bulb to light up?",
+      "answer": "A stationary magnet creates a constant magnetic flux through the coil. According to Faraday's Law, only a CHANGING flux induces an EMF. Since dΦ/dt = 0, no EMF is induced and no current flows."
+    },
+    "q2": {
+      "question": "Why does moving the magnet faster make the bulb brighter?",
+      "answer": "Moving the magnet faster increases the rate of flux change (dΦ/dt). Since induced EMF is proportional to this rate, faster motion produces greater EMF, which drives more current through the bulb, making it brighter."
+    },
+    "q3": {
+      "question": "Why does the voltmeter deflect in opposite directions when moving toward vs away?",
+      "answer": "When moving toward the coil, flux is increasing (positive dΦ/dt). When moving away, flux is decreasing (negative dΦ/dt). The opposite signs of dΦ/dt produce opposite EMF directions, per Faraday's Law."
+    },
+    "q4": {
+      "question": "How does Lenz's Law explain the direction of induced current?",
+      "answer": "Lenz's Law states that the induced current creates its own magnetic field that opposes the change causing it. If the magnet approaches, the induced field repels it. If it retreats, the induced field attracts it. This ensures energy conservation."
+    },
+    "q5": {
+      "question": "Why does the double coil show a larger EMF than the single coil?",
+      "answer": "The induced EMF is proportional to the number of turns: ε = -N × dΦ/dt. With 4 loops instead of 1, the double coil produces 4 times the EMF for the same flux change rate."
+    },
+    "q6": {
+      "question": "What happens if I move the magnet through the coil completely?",
+      "answer": "As the magnet enters, flux increases → positive EMF. As it exits, flux decreases → negative EMF. The voltmeter will deflect one way, then the other. If moved quickly, you'll see a pulse of EMF in each direction."
+    },
+    "q7": {
+      "question": "How is this simulation related to how generators produce electricity?",
+      "answer": "In generators, either a coil rotates in a magnetic field or magnets rotate around a coil. This continuous motion creates continuous flux changes, producing alternating EMF (AC electricity). The simulation demonstrates the same fundamental principle."
+    },
+    "q8": {
+      "question": "What determines the direction of the induced current?",
+      "answer": "The direction is determined by whether flux is increasing or decreasing (Faraday's Law) and follows Lenz's Law - the current creates a field opposing the change. Reversing magnet polarity or motion direction reverses the current direction."
+    }
+  },
+
+  "chatbotGuidance": {
+    "whenUserAsksAboutNoEMF": "If the user is confused about why there's no EMF, check if the magnet is stationary. Explain that flux must be CHANGING.",
+    "whenUserAsksAboutDirection": "Use Lenz's Law to explain. The induced current opposes the change - approaching magnet is repelled, departing magnet is attracted.",
+    "whenUserAsksAboutStrength": "Explain the factors: speed of movement, number of coil loops, magnet strength. All affect dΦ/dt or N.",
+    "whenUserAsksWhatToTry": "Suggest systematic experiments: vary one parameter at a time, compare single vs double coil, try different speeds.",
+    "whenUserAsksAboutRealWorld": "Connect to generators, transformers, wireless charging, induction cooking, metal detectors.",
+    "whenUserIsConfused": "Start with the basics: moving magnet → changing flux → induced EMF → current flows → bulb lights."
+  }
+}

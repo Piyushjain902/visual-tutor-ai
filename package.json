@@ -1,0 +1,14 @@
+{
+  "name": "visual-tutor-ai",
+  "type": "module",
+  "scripts": {
+    "deploy": "node deploy.js"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.999.0",
+    "@aws-sdk/lib-storage": "^3.999.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

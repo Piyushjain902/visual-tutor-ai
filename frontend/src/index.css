@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-canvas: #f4f7fd;
+  --bg-canvas-soft: #e9effa;
+  --surface: #ffffff;
+  --surface-elevated: #fcfdff;
+  --surface-strong: #eef4ff;
+  --border: #d6e0f1;
+  --border-strong: #bfcee7;
+  --text-primary: #132746;
+  --text-secondary: #3e5579;
+  --text-muted: #667b9d;
+  --accent: #1f4dbd;
+  --accent-strong: #173f98;
+  --accent-soft: #eaf1ff;
+  --success: #197a4a;
+  --success-soft: #e9f7ef;
+  --danger: #b73e3e;
+  --danger-soft: #fdeff0;
+  --shadow-sm: 0 1px 3px rgba(18, 32, 63, 0.08);
+  --shadow-md: 0 14px 30px rgba(14, 31, 66, 0.12);
+  --shadow-lg: 0 24px 48px rgba(14, 31, 66, 0.16);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI Variable", "Avenir Next", "Manrope", "Trebuchet MS", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(circle at 8% 12%, #ffffff 0%, transparent 35%),
+    radial-gradient(circle at 92% 10%, #dfeaff 0%, transparent 40%),
+    linear-gradient(165deg, var(--bg-canvas) 0%, var(--bg-canvas-soft) 100%);
+  color: var(--text-primary);
+}
+
+::selection {
+  background: #d9e7ff;
+  color: #0f2e7f;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e6edf9;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #afbed7;
+  border-radius: 999px;
+  border: 2px solid #e6edf9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #91a6c9;
+}
